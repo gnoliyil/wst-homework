@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Frameset Demo</title>
+</head>
+<body>
+test
+	<frameset cols="300,*" >
+		<frame name="left" src="../index.htm" target="main">
+		</frame>
+		<frame name="right" src="../index.htm" >
+		</frame>
+	</frameset>
+</body>
+</html>

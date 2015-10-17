@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link href="../css/main.css" rel="stylesheet" />
+<title>Homework 1 | Li Yilong</title>
+</head>
+
+<body>
+<div class="container">
+	<div class="heading">
+		<h1><a href="../index.htm" >Li Yilong’s Homepage</a></h1>
+	</div>
+	<div class="main">
+		<div class="articles">
+			<div class="article" id="article-homework">
+				<h2>Homework 1</h2>
+				<p>
+				<a href="#article-q1">Question 1</a> |
+				<a href="#article-q2">Question 2</a> 
+				</p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q1">Question 1</h2>
+				<blockquote>For the three categories of web software technology we've just defined, you are asked to find out which category so-called <strong>"Netscape plug-in"</strong> technology belongs to. Please describe the basic idea of the technology, and give your reasoning on its position in the technology categories. </blockquote>
+				<h3>Category</h3> <p>Distributed Object Technology. </p>
+				<h3>Basic Idea</h3> <p>It can handle files of content-types which the browser can not handle natively. When the browser encounters a file that it can not handle, the plugin will be loaded and be responsible for rendering the data correctly like an external application running in the browser. </p>
+				<h3>Reason</h3> <p>Like Microsoft's ActiveX, plug-ins can be called by the browser to render a certain file. They work together, but they reside in different processes or threads and they can only communicate using a common interface(defined in NPAPI). </p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q2">Question 2</h2>
+				<blockquote>In a normal intercommunication between Web browser and Web Server, Web Server closes the network communication right after it sends back the document requested by the browser. Think about this <strong>statusless</strong> character of World Wide Web. Give some good points and bad points of it. Can a web server know exactly how many browsers are reading its document? </blockquote>
+				
+				<h3>Good Points</h3>
+				<ul>
+					<li>It can lessen the burden of the Internet server, especially when there are many users are connecting this website. </li>
+					<li>Though the maximum number of active processes is limited, the server can deal with more requests because it needn't be all transmitted at the same time. </li>
+					<li>The status data is far less valuable than the Web page content itself, and in most cases we don't need the status data. So it can save the resources which are used by the web server. </li>
+				</ul>
+				
+				<h3>Bad Points</h3>
+					<ul>
+					<li>The Web server doesn't keep any memories about a certain client, and it is difficult for a server to determine whether two connections come from the same client if other technologies like Cookies are not introduced.  </li>
+					<li> For websites with user authentication info, it will be bothersome if we have to log in to the server every time.</li>
+					</ul>
+			</div>
+		</div>
+		
+		<div class="navbar">
+			<h2>Related Links</h2>
+			<ul>
+				<li><a href="https://git.ustclug.org/u/gnoliyil">My USTC GitLab</a></li>
+				<li><a href="http://bdwm.net/bbs/bbsqry.php?name=gnoliyil">My bdwm.net account (Gnoliyil)</a></li>
+				<li><a href="http://space.bilibili.com/7119">My bilibili.com account (Gnoliyil)</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="footer">
+		<p>This page has been validated by <a href="https://validator.w3.org">W3C Validator</a>.  </p>
+		<p> Li Yilong, 2015. </p>
+	</div>
+</div>
+</body>
+</html>
