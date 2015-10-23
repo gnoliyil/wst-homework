@@ -35,19 +35,24 @@
 			<div class="article" id="article-homework">
 				<h2>Homework 3</h2>
 				<p>This is the page of homework 3 using CSS' <code>&lt;display: table; &gt;</code> features. </p>
+				<p>Below is the questionnaire using Perl scripts and jQuery's ajax features. </p>
 			</div>
 			
 			<div class="article" id="user-list">
 				<h2>User Lists</h2>
 				<button id="refresh" >Refresh</button>
-				<button id="delete">Delete</button><br />
+				<button id="delete">Delete</button>
+				<span id="info"></span>
+				<br />
 				<table id="user-data" style="width: 100%; ">
 					<thead style="font-weight: bold; ">
+                    <tr>
 						<td></td>
 						<td>Student ID</td>
 						<td>Name</td>
 						<td>Address</td>
 						<td>Gender</td>	
+                    </tr>
 					</thead>
 				</table>
 			</div>
@@ -56,18 +61,18 @@
 				<h2>Questionnaire</h2>
 				<form id="question" >
 					<p><label for="stuid">Student ID</label>
-					<input name="stuid" type="text" /> </p>
+					<input id="stuid" name="stuid" type="text" /> </p>
 					<p><label for="name">Name</label>
-					<input name="name" type="text" /> </p>
+					<input id="name" name="name" type="text" /> </p>
 					<p><label for="addr">Address</label>
-					<input name="addr" type="text" /> </p>
+					<input id="addr" name="addr" type="text" /> </p>
 					<p><label for="password">Password</label>
-					<input name="password" type="password" /> </p>
+					<input id="password" name="password" type="password" /> </p>
 					<p><label for="gender">Gender</label>
-					<input name="gender" type="radio" value="1" /> Male 
+					<input id="gender" name="gender" type="radio" value="1" /> Male 
 					<input name="gender" type="radio" value="0" /> Female 
 					</p>
-					<p><button id="submit" />Submit</button></p>
+					<p><button id="add" type="button">Submit</button></p>
 				</form>
 			</div>
 		</div>
@@ -103,19 +108,22 @@ function remove_items(){
 
     $.ajax({
         type: 'POST', 
-        url : 'cgi-bin/del.pl', 
+        url : '/cgi-bin/del.pl', 
+	cache: false,
         data: 'stuid=' + delitems, 
 		error: function(request) {
 			alert("Connection error");
 		},
         success: function(data){
-                console.log(data.code);
-                if (data.code == '0')
+                console.log(data);
+                if (data.code == "0"){
                     $('input[type=checkbox]:checked').each(
                         function(){
                             $(this).parent().parent().remove();
                         }
                     ); 
+		    $('#info').text('Successfully Deleted!'); 
+		}
                 else 
                     alert(data.msg); 
         },  
@@ -125,14 +133,17 @@ function remove_items(){
 
 /* reload table */
 function reload_table(){
-    $('tbody').remove();
+    $('#user-data tbody tr').remove();
+    // alert("removed"); 
     $.ajax({
-        type: 'GET', 
-        url : 'cgi-bin/show.pl', 
+        type: 'GET',
+	cache: false,  
+        url : '/cgi-bin/show.pl', 
 		error: function(request) {
 			alert("Connection error");
 		},
         success: function(data){
+ 	    //console.log(data); 
             //document.write('123'); 
             for (var i in data) {
                 var s = "<tr class=\"data-row\">" + 
@@ -141,9 +152,11 @@ function reload_table(){
                 "<td>" + data[i].stuid + "</td>" + 
                 "<td>" + data[i].name + "</td>" + 
                 "<td>" + data[i].addr + "</td>" + 
-                "<td>" + data[i].gender + "</td></tr>" ;
+                "<td>" + (data[i].gender == '1' ? "Male" : "Female") + "</td></tr>" ;
+                //console.log(s); 
                 $('#user-data').append(s);
             }
+            $('#info').text('Successfully Added!'); 
         },
         dataType: 'json'
     }); 
@@ -152,13 +165,15 @@ function reload_table(){
 function add_item(){
 	$.ajax({
         type: 'GET', 
-        url : 'cgi-bin/add.pl', 
-		data: $('#question').serialize(), 
-		error: function(request) {
-			alert("Connection error");
-		},
+        url : '/cgi-bin/add.pl', 
+	cache: false, 
+        data: $('#question').serialize(), 
+        error: function(request) {
+	        alert(request.msg);
+	},
         success: function(data){
-			if (data.code == 0)
+                        console.log(data); 
+			if (data.code == "0")
 			{
 				reload_table(); 
 			} else {
@@ -175,14 +190,16 @@ $('document').ready(function(){
 }); 
 
 $('#refresh').bind("click", function(){
+    //alert('refresh'); 
     reload_table(); 
 }); 
 
 $('#delete').bind("click", function(){
+    //alert('delete');
     remove_items(); 
 }); 
 
-$('#submit').bind("click", function(){
+$('#add').click(function(){
     add_item(); 
 }); 
 
