@@ -179,3 +179,29 @@ body
 	color: #bbb;
 	text-decoration: none; 
 }
+
+button{
+	display: inline-block; 
+	vertical-align: baseline; 
+	margin: 5px 5px 5px 5px; 
+	outline: none; 
+	padding: .5em 2em .55em; 
+	cursor: pointer; 
+	text-align: center; 
+	text-shadow: 0 1px 1px rgba(0,0,0,.3); 
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em; 
+	border:1px rgba(0, 0, 0, 0.1) solid; 
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2); 
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2); 
+	box-shadow: 3px 3px 10px rgba(0,0,0,.2); 
+}
+button:hover{
+	background-color: rgba(0, 0, 0, 0.1); 
+	box-shadow: 0 0 0 ; 
+}
+button:active{
+	background-color: rgba(0, 0, 0, 0.6); 
+	box-shadow: 0 0 0 ; 
+	color: #ffffff; 
+}	
