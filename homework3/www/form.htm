@@ -1,0 +1,99 @@
+<html>
+<head>
+</head>
+
+<body>
+
+<button id="refresh" >Refresh</button>
+<button id="delete">Delete</button><br />
+<table id="user-data">
+    <thead>
+        <td></td>
+        <td>Student ID</td>
+        <td>Name</td>
+        <td>Address</td>
+        <td>Gender</td>
+    </thead>
+</table>
+<hr />
+<form method=POST action="cgi-bin/add.pl">
+    Student ID: <input name="stuid" type="text" /> <br />
+    Name: <input name="name" type="text" /> <br />
+    Address: <input name="addr" type="text" /> <br />
+    Password: <input name="password" type="password" /> <br />
+    Gender: <input name="gender" type="radio" value="1" /> Male 
+    <input name="gender" type="radio" value="0" /> Female 
+    <br />
+    <input type="submit" value="Submit" name="submit" />
+</form>
+
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+ /* delete items from table */
+ function remove_items(){
+     var arr = []; 
+     var list = $('input[type=\'checkbox\']:checked'); 
+     for (var i in list.toArray()){
+         arr.push(list[i].getAttribute('id')); 
+     }
+     var delitems = arr.join('|'); 
+     console.log(delitems);
+
+     $.ajax({
+         type: 'POST', 
+         url : 'cgi-bin/del.pl', 
+         data: 'stuid=' + delitems, 
+         success: function(data){
+                 console.log(data.code);
+                 if (data.code == '0')
+                     $('input[type=checkbox]:checked').each(
+                         function(){
+                             $(this).parent().parent().remove();
+                         }
+                     ); 
+                 else 
+                     alert(data.msg); 
+         },  
+         dataType: 'json'
+     }); 
+ }
+
+ /* reload table */
+ function reload_table(){
+     $('tbody').remove();
+     $.ajax({
+         type: 'GET', 
+         url : 'cgi-bin/show.pl', 
+         success: function(data){
+             //document.write('123'); 
+             for (var i in data) {
+                 var s = "<tr class=\"data-row\">" + 
+                 "<td><input type=\"checkbox\" id=\"" + 
+                 data[i].stuid + "\" /></td>" + 
+                 "<td>" + data[i].stuid + "</td>" + 
+                 "<td>" + data[i].name + "</td>" + 
+                 "<td>" + data[i].addr + "</td>" + 
+                 "<td>" + data[i].gender + "</td></tr>" ;
+                 $('#user-data').append(s);
+             }
+         },
+         dataType: 'json'
+     }); 
+ }
+
+ /* load table */
+ $('document').ready(function(){
+     reload_table();  
+ }); 
+
+ $('#refresh').bind("click", function(){
+     reload_table(); 
+ }); 
+
+ $('#delete').bind("click", function(){
+     remove_items(); 
+ }); 
+</script>
+
+</body>
+</html>

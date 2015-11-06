@@ -1,0 +1,166 @@
+body
+{
+	background-color: #555555; 
+	font-family: "Segoe UI", "Microsoft Yahei UI", Tahoma, sans-serif; 
+	font-size: 12pt; 
+	
+	min-width: 1024px; 
+}
+
+.container
+{
+	width: 70%; 
+	min-width: 800px; 
+	margin: 0 15% 0 15%;
+}
+
+.heading
+{
+	padding: 2em;
+}
+
+.heading h1
+{
+	color: #eeeeee; 
+}
+
+.heading a
+{
+	text-decoration: none;
+	color: #eeeeee; 
+}
+
+.main
+{
+	padding: 2em ; 
+	background-color: #aaaaaa; 
+}
+
+.main a
+{
+	text-decoration: none; 
+	color: #777; 
+}
+
+.main a:link
+{
+	text-shadow: 0 0 1px #777; 
+}
+
+.main a:hover
+{
+	color:#337;
+	text-shadow: 0 0 1px #337; 
+}
+
+.main h2
+{
+	margin: 0.2em; 
+	margin-left: 0;
+}
+
+.articles
+{
+	width: 68%;
+	float: left; 
+}
+
+.article
+{
+	padding: 1em; 
+	margin: 1em 0.5em 1em 0.5em; 
+	background-color: #eeeeee; 
+	box-shadow: 0 0 15px #777; 
+}
+
+.article blockquote
+{
+	margin: 1em; 
+	padding: 1em; 
+	background-color: #dddddd; 
+	quotes:"\201C""\201D""\2018""\2019";
+}
+
+.article blockquote:before {
+	color:#ccc;
+	content:open-quote;
+	font-size:4em;
+	line-height:.1em;
+	margin-right:.25em;
+	vertical-align:-.4em;
+}
+
+.article tr:hover
+{
+	background-color:#ccc; 
+}
+
+
+.navbar
+{
+	width: 25%;  
+	float: right; 
+	
+	padding: 1em; 
+	margin: 1em 0em 1em 0.5em ; 
+	background-color: #eeeeee; 
+	box-shadow: 0 0 15px #777; 
+}
+
+.navbar ul
+{
+	list-style-type: square;
+}
+
+.navbar ul li
+{
+	margin-left: -1em;
+}
+
+.main:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.footer
+{
+	text-align:center; 
+	color: #ddd; 
+}
+
+.footer a
+{
+	color: #bbb;
+	text-decoration: none; 
+}
+
+.button{
+	display: inline-block; 
+	vertical-align: baseline; 
+	margin: 5px 5px 5px 5px; 
+	outline: none; 
+	padding: .5em 2em .55em; 
+	cursor: pointer; 
+	text-align: center; 
+	text-shadow: 0 1px 1px rgba(0,0,0,.3); 
+	text-decoration: none; 
+	color: #000; 
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em; 
+	border:1px rgba(0, 0, 0, 0.1) solid; 
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2); 
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2); 
+	box-shadow: 3px 3px 10px rgba(0,0,0,.2); 
+}
+.button:hover{
+	background-color: rgba(0, 0, 0, 0.1); 
+	box-shadow: 0 0 0 ; 
+}
+.button:active{
+	background-color: rgba(0, 0, 0, 0.6); 
+	box-shadow: 0 0 0 ; 
+	color: #ffffff; 
+}	

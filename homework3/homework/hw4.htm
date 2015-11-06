@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link href="../css/main.css" rel="stylesheet" />
+<title>Homework 4 | Li Yilong</title>
+<style type="text/css">
+	.article label{
+		width: 100px; 
+		margin-right: 10px; 
+		float: left; 
+	}
+</style>
+
+</head>
+
+<body>
+<div class="container">
+	<div class="heading">
+		<h1><a href="../index.htm" >Li Yilong’s Homepage</a></h1>
+	</div>
+	<div class="main">
+		<div class="articles">
+			<div class="article" id="article-homework">
+				<h2>Homework 4</h2>
+				<p>
+				<a class="button" href="../index.htm">Back to Homepage</a> 
+				<a class="button" href="#article-q1">Question </a>
+				</p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q1">Question 1</h2>
+				<blockquote>A set of pages comprising the following elements: paragraphs, line breaks, headings, images, hypertext links, hypertext links that target within the same page, an ordered list, a table with rowspan and colspan attributes specified, a frameset which divides the screen into two parts, and an HTML comment. </blockquote>
+				
+				</blockquote>
+			</div>
+			
+			
+			<div class="article" id="article-homework">
+				<h2>Homework 3</h2>
+				<p>This is the page of homework 3 using CSS' <code>&lt;display: table; &gt;</code> features. </p>
+				<p>Below is the questionnaire using Perl scripts and jQuery's ajax features. </p>
+			</div>
+			
+			<div class="article" id="user-list">
+				<h2>User Lists</h2>
+				<button id="refresh" >Refresh</button>
+				<button id="delete">Delete</button>
+				<span id="info"></span>
+				<br />
+				<table id="user-data" style="width: 100%; ">
+					<thead style="font-weight: bold; ">
+                    <tr>
+						<td></td>
+						<td>Name</td>
+						<td>Age</td>
+						<td>Mail Address</td>
+						<td>Gender</td>	
+                    </tr>
+					</thead>
+				</table>
+			</div>
+				
+			<div class="article" id="article-aboutme">
+				<h2>Questionnaire</h2>
+				<form id="question" >
+					
+					<p><label for="name">Name</label>
+					<input id="name" name="name" type="text" /> </p>
+					<p><label for="age">Age</label>
+					<input id="age" name="age" type="text" /> </p>
+					<p><label for="addr">Address</label>
+					<input id="addr" name="addr" type="text" /> </p>
+					<p><label for="gender">Gender</label>
+					<input id="gender" name="gender" type="radio" value="1" /> Male 
+					<input name="gender" type="radio" value="0" /> Female 
+					</p>
+					<p><button id="add" type="button">Submit</button></p>
+				</form>
+			</div>
+		</div>
+		<div class="navbar">
+			<h2>Related Links</h2>
+			<ul>
+				<li><a href="https://git.ustclug.org/u/gnoliyil">My USTC GitLab</a></li>
+				<li><a href="http://bdwm.net/bbs/bbsqry.php?name=gnoliyil">My bdwm.net account (Gnoliyil)</a></li>
+				<li><a href="http://space.bilibili.com/7119">My bilibili.com account (Gnoliyil)</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="footer">
+		<p>This page has been validated by <a href="https://validator.w3.org">W3C Validator</a>.  </p>
+		<p> Li Yilong, 2015. </p>
+	</div>
+</div>
+
+<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+/* delete items from table */
+function remove_items(){
+    var arr = []; 
+    var list = $('input[type=\'checkbox\']:checked'); 
+    for (var i in list.toArray()){
+        arr.push(list[i].getAttribute('id')); 
+    }
+    var delitems = arr.join('|'); 
+    console.log(delitems);
+
+    $.ajax({
+        type: 'POST', 
+        url : '/cgi-bin/del.pl', 
+	cache: false,
+        data: 'id=' + delitems, 
+		error: function(request) {
+			alert("Connection error");
+		},
+        success: function(data){
+                console.log(data);
+                if (data.code == "0"){
+                    $('input[type=checkbox]:checked').each(
+                        function(){
+                            $(this).parent().parent().remove();
+                        }
+                    ); 
+		    $('#info').text('Successfully Deleted!'); 
+		}
+                else 
+                    alert(data.msg); 
+        },  
+        dataType: 'json'
+    }); 
+}
+
+/* reload table */
+function reload_table(){
+    $('#user-data tbody tr').remove();
+    // alert("removed"); 
+    $.ajax({
+        type: 'GET',
+	cache: false,  
+        url : './show.php', 
+		error: function(request) {
+			alert("Connection error");
+			return -1; 
+		},
+        success: function(data){
+ 	    //console.log(data); 
+            //document.write('123'); 
+            for (var i in data) {
+                var s = "<tr class=\"data-row\">" + 
+                "<td><input type=\"checkbox\" id=\"" + 
+                data[i].id + "\" /></td>" + 
+                "<td>" + data[i].name + "</td>" + 
+                "<td>" + data[i].age + "</td>" + 
+                "<td>" + data[i].addr + "</td>" + 
+                "<td>" + (data[i].gender == '1' ? "Male" : "Female") + "</td></tr>" ;
+                //console.log(s); 
+                $('#user-data').append(s);
+            }
+			return 0;  
+        },
+        dataType: 'json'
+    }); 
+}
+
+function add_item(){
+	$.ajax({
+        type: 'GET', 
+        url : './add.php', 
+	cache: false, 
+        data: $('#question').serialize(), 
+        error: function(request) {
+	        alert(request.msg);
+	},
+        success: function(data){
+                        console.log(data); 
+			if (data.code == "0")
+			{
+				if (! reload_table())
+				    $('#info').text('Successfully Added!'); ; 
+			} else {
+				alert(data.msg); 
+			}
+        },
+        dataType: 'json'
+    }); 
+}
+
+/* load table */
+$('document').ready(function(){
+    reload_table();  
+}); 
+
+$('#refresh').bind("click", function(){
+    //alert('refresh'); 
+    reload_table(); 
+}); 
+
+$('#delete').bind("click", function(){
+    //alert('delete');
+    remove_items(); 
+}); 
+
+$('#add').click(function(){
+    add_item(); 
+}); 
+
+ </script>
+</body>
+</html>
