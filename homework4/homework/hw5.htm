@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link href="/css/main.css" rel="stylesheet" />
+<title>Homework 5 | Li Yilong</title>
+</head>
+
+<body>
+<div class="container">
+	<div class="heading">
+		<h1><a href="../index.htm" >Li Yilong’s Homepage</a></h1>
+	</div>
+	<div class="main">
+		<div class="articles">
+			<div class="article" id="article-homework">
+				<h2>Homework 5</h2>
+				<p>
+				<a class="button" href="/index.htm">Back to Homepage</a> 
+				<a class="button" href="#article-q1">Question 1</a> 
+				<a class="button" href="#article-q2">Question 2</a> 
+				<a class="button" href="#article-q3">Question 3</a> 
+				</p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q1">Question 1</h2>
+				<blockquote><ul>
+				<li> Run the program and take a snapshot of the window it produces so that your group number can be clearly seen. </li>
+				<li>Take a snapshot of the command window showing a prompt with your name. </li></ul></blockquote>
+				<h3>Answer</h3> <p><img src="../images/p5-1.png" width="90%" /> </p>
+				<p><img src="../images/p5-2.png" width="90%" /> </p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q2">Question 2</h2>
+				<blockquote>You need to replace the BufferedReader with a Scanner and link your code on your web page.  </blockquote>
+				
+				<h3>Answer</h3>
+				<p><a href="../code/internetics/Sample.java">Sample.java</a></p>
+				<p><a href="../code/RunSample.java">RunSample.java</a></p>
+				<p><a href="../code/homework5.tar.gz">Download the tarball</a></p>
+			</div>
+			
+			<div class="article">
+				<h2 id="article-q3">Question 3(Optional)</h2>
+				<blockquote><ul>
+					<li>Configure your apache to handle java servlets.</li>
+					<li>Write some servelets and JSP pages if you wish.</li></ul>
+				</blockquote>
+				
+				<h3>Answer</h3>
+				<p>The Tomcat has been successfully configured on the server. You can visit <a href="http://162.105.146.180:14101">Here</a> to see the Tomcat homepage. Below is a simple JSP-based calculator. </p>
+				
+				<form action="http://162.105.146.180:14101/calc.jsp" method="GET" target="_blank">
+				<p><input type="text" name="a" /> 
+				<select name="op">
+				  <option value ="add">＋</option>
+				  <option value ="minus">－</option>
+				  <option value="multi">×</option>
+				  <option value="div">÷</option>
+				</select>
+				<input type="text" name="b" /> 
+				<input type="submit"/> 
+				</p>
+				</form>
+			</div>
+		</div>
+		
+		<div class="navbar">
+			<h2>Related Links</h2>
+			<ul>
+				<li><a href="https://git.ustclug.org/u/gnoliyil">My USTC GitLab</a></li>
+				<li><a href="http://bdwm.net/bbs/bbsqry.php?name=gnoliyil">My bdwm.net account (Gnoliyil)</a></li>
+				<li><a href="http://space.bilibili.com/7119">My bilibili.com account (Gnoliyil)</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="footer">
+		<p>This page has been validated by <a href="https://validator.w3.org">W3C Validator</a>.  </p>
+		<p> Li Yilong, 2015. </p>
+	</div>
+</div>
+</body>
+</html>
